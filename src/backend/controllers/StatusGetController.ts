@@ -7,7 +7,14 @@ export default class StatusGetController implements Controller {
 	constructor(private readonly httpResponse: HttpResponse) {}
 
 	run(req: Request, res: Response): void {
-		//		res.status(httpStatus.OK).send();
-		this.httpResponse.Ok();
+		try {
+			this.httpResponse.Ok(res, "Status server: 🟢");
+		} catch (error) {
+			if (error instanceof Error) {
+				this.httpResponse.Error(res, { message: error.message });
+			} else {
+				this.httpResponse.Error(res, { message: "An unexpected error occurred." });
+			}
+		}
 	}
 }

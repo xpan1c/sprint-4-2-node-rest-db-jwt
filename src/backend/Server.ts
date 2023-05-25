@@ -1,8 +1,11 @@
 import { json, urlencoded } from "body-parser";
 import cors from "cors";
-import express from "express";
+import express, { Request, Response, Router } from "express";
 import helmet from "helmet";
 import * as http from "http";
+
+import { HttpResponse } from "../shared/infrastructure/response/HttpResponse";
+import { registerRoutes } from "./routes";
 
 export class Server {
 	private readonly express: express.Express;
@@ -16,6 +19,14 @@ export class Server {
 		this.express.use(cors());
 		this.express.use(json());
 		this.express.use(urlencoded({ extended: true }));
+		const router = Router();
+		this.express.use(router);
+		registerRoutes(router);
+		router.use((err: Error, req: Request, res: Response, _next: () => void) => {
+			// eslint-disable-next-line no-console
+			console.log(err);
+			new HttpResponse().Error(res, "Contact to an admin");
+		});
 	}
 
 	async listen(): Promise<void> {
