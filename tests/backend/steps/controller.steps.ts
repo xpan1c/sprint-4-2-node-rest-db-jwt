@@ -20,9 +20,9 @@ Then("the response body should be:", (response: string) => {
 });
 Given("a player name {string}", (name: string) => {
 	// Write code here that turns the phrase above into concrete actions
-	player = JSON.parse(`{name: ${name}}`);
+	player = JSON.parse(`{"name": "${name}"}`);
 });
 When("I send a POST request to {string} with this player", (route: string) => {
 	// Write code here that turns the phrase above into concrete actions
-	_request = request(application.httpServer).put(route).send(player);
+	_request = request(application.httpServer).post(route).send(player);
 });

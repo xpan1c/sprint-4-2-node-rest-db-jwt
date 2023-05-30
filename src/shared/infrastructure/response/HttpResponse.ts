@@ -11,6 +11,14 @@ export class HttpResponse {
 		});
 	}
 
+	Created(res: Response, data?: unknown): Response {
+		return res.status(HttpStatus.CREATED).json({
+			status: HttpStatus.OK,
+			statusMsg: "Success",
+			data,
+		});
+	}
+
 	BadRequest(res: Response, data?: unknown): Response {
 		return res.status(HttpStatus.BAD_REQUEST).json({
 			status: HttpStatus.BAD_REQUEST,
