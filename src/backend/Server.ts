@@ -9,11 +9,9 @@ import { registerRoutes } from "./routes";
 
 export class Server {
 	private readonly express: express.Express;
-	private readonly port: string;
 	private httpServer?: http.Server;
 
-	constructor(port: string) {
-		this.port = port;
+	constructor(private readonly port: string) {
 		this.express = express();
 		this.express.use(helmet());
 		this.express.use(cors());
@@ -26,6 +24,11 @@ export class Server {
 			// eslint-disable-next-line no-console
 			console.log(err);
 			new HttpResponse().Error(res, "Contact to an admin");
+		});
+		this.express.use((err: Error, req: Request, res: Response, _next: () => void) => {
+			// eslint-disable-next-line no-console
+			console.log(err);
+			new HttpResponse().Error(res, "Server error");
 		});
 	}
 

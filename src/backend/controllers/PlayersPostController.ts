@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 
-import { PlayerCreator } from "../../Contexts/Players/application/PlayerCreator";
+import { PlayerCreator } from "../../Players/application/PlayerCreator";
 import { HttpResponse } from "../../shared/infrastructure/response/HttpResponse";
 import { Controller } from "./Controller";
 

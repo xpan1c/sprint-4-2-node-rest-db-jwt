@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import { PlayerCreator } from "../../Contexts/Players/application/PlayerCreator";
+import { PlayerCreator } from "../../Players/application/PlayerCreator";
 import { UuidCreator } from "../../shared/application/UuidCreator";
 import { HttpResponse } from "../../shared/infrastructure/response/HttpResponse";
 import { PlayersPostController } from "../controllers/PlayersPostController";

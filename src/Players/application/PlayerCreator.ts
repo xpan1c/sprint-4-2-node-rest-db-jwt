@@ -1,4 +1,4 @@
-import { UuidCreator } from "../../../shared/application/UuidCreator";
+import { UuidCreator } from "../../shared/application/UuidCreator";
 import { Player } from "../domain/Player";
 import { PlayerRepository } from "../domain/PlayerRepository";
 
