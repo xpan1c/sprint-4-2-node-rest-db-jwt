@@ -6,7 +6,7 @@ import { application } from "./hooks.steps";
 
 let _request: request.Test;
 let _response: request.Response;
-let player: JSON;
+let player: { name: string };
 
 Given("I send a GET request to {string}", (route: string) => {
 	_request = request(application.httpServer).get(route);
@@ -16,7 +16,6 @@ Given("a send a POST request to {string} with this player", (route: string) => {
 	// Write code here that turns the phrase above into concrete actions
 	request(application.httpServer).post(route).send(player);
 });
-Given('there is a player with the identifier "{id}"', (id) => {});
 Then("the response status code should be {int}", async (status: number) => {
 	_response = await _request.expect(status);
 });
@@ -25,7 +24,7 @@ Then("the response body should be:", (response: string) => {
 });
 Given("a player name {string}", (name: string) => {
 	// Write code here that turns the phrase above into concrete actions
-	player = JSON.parse(`{"name": "${name}"}`);
+	player = { name };
 });
 
 When("I send a POST request to {string} with this player", (route: string) => {
@@ -35,4 +34,14 @@ When("I send a POST request to {string} with this player", (route: string) => {
 When("I send a POST request to {string} with this player a second time", (route: string) => {
 	// Write code here that turns the phrase above into concrete actions
 	_request = request(application.httpServer).post(route).send(player);
+});
+
+Then("the response body should contain the player details", () => {
+	const responseBody = _response.body;
+	assert.strictEqual(responseBody.statusMsg, "Success");
+	const data = responseBody.data;
+	expect(data).toHaveProperty("id");
+	expect(data).toHaveProperty("name");
+	expect(typeof data.id).toBe("string");
+	expect(typeof data.name).toBe("string");
 });
