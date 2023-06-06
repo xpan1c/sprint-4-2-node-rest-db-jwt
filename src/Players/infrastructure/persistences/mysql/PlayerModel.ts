@@ -1,6 +1,6 @@
 import { DataTypes, InferAttributes, InferCreationAttributes, Model } from "sequelize";
 
-import { sequelize } from "../../../../shared/infrastructure/persistenceConfig/sequelize.config";
+import { sequelize } from "../../../../shared/infrastructure/persistence/config/sequelize.config";
 
 // eslint-disable-next-line no-use-before-define
 export class Players extends Model<InferAttributes<Players>, InferCreationAttributes<Players>> {
@@ -18,6 +18,5 @@ Players.init(
 			allowNull: false,
 		},
 	},
-
-	{ sequelize, tableName: "players" }
+	{ sequelize, tableName: "players", timestamps: false }
 );

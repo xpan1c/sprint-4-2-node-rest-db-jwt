@@ -15,5 +15,5 @@ export const register = (router: Router): void => {
 	const httpResponse = new HttpResponse();
 	const playersCtrl = new PlayersPostController(playerCreator, httpResponse);
 	// eslint-disable-next-line @typescript-eslint/no-misused-promises
-	router.post("/players", async (req: Request, res: Response) => await playersCtrl.run(req, res));
+	router.put("/players", async (req: Request, res: Response) => await playersCtrl.run(req, res));
 };
