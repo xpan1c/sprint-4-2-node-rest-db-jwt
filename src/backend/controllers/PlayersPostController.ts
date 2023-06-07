@@ -13,7 +13,7 @@ export class PlayersPostController implements Controller {
 	async run(req: Request, res: Response): Promise<void> {
 		const name: string = req.body.name;
 		try {
-			await this.playerCreator.run(name);
+			await this.playerCreator.run({ name });
 		} catch (error) {
 			this.httpResponse.BadRequest(res, "player already exist");
 			console.log(error);

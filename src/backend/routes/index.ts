@@ -1,6 +1,9 @@
-import { Router } from "express";
+import { Request, Response, Router } from "express";
+import { validationResult } from "express-validator";
 import * as glob from "glob";
 import * as path from "path";
+
+import { HttpResponse } from "../../shared/infrastructure/response/HttpResponse";
 
 export function registerRoutes(router: Router): void {
 	const normalizedDirname = path.normalize(__dirname).replace(/\\/g, "/");
@@ -18,4 +21,14 @@ function register(routePath: string, router: Router) {
 	} else {
 		console.error(`No register function found in module ${routePath}`);
 	}
+}
+// eslint-disable-next-line @typescript-eslint/ban-types
+export function validateReqSchema(req: Request, res: Response, next: Function): Response {
+	const validationErrors = validationResult(req);
+	if (validationErrors.isEmpty()) {
+		return next();
+	}
+	const errors = validationErrors.mapped();
+
+	return new HttpResponse().UnprocessableContent(res, errors);
 }

@@ -1,5 +1,6 @@
 import { Sequelize } from "sequelize";
 
+import { InvalidArgumentError } from "../../../../shared/domain/value-object/InvalidArgumentError";
 import { SequelizeRepository } from "../../../../shared/infrastructure/persistence/sequelize/SequelizeRepository";
 import { Player } from "../../../domain/Player";
 import { PlayerRepository } from "../../../domain/PlayerRepository";
@@ -17,7 +18,7 @@ export class SequelizePlayerRepository
 	async save(player: Player): Promise<void> {
 		await this.sequelize.sync();
 		if (await this.findByName(player.name)) {
-			throw new Error("Player's name already exist");
+			throw new InvalidArgumentError("Player's name already exist");
 		}
 		await Players.create(player);
 	}
@@ -26,7 +27,7 @@ export class SequelizePlayerRepository
 		const player = await Players.findByPk(id);
 
 		if (player === null) {
-			throw new Error("Player id does not exist");
+			throw new InvalidArgumentError("Player id does not exist");
 		}
 
 		return new Player(player.id, player.name);
