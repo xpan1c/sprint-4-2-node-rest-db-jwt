@@ -1,26 +1,20 @@
-import { Sequelize } from "sequelize";
+import { ModelAttributes } from "sequelize";
 
 import { InvalidArgumentError } from "../../../../shared/domain/value-object/InvalidArgumentError";
 import { SequelizeRepository } from "../../../../shared/infrastructure/persistence/sequelize/SequelizeRepository";
 import { Player } from "../../../domain/Player";
 import { PlayerRepository } from "../../../domain/PlayerRepository";
-import { Players } from "./PlayerModel";
+import { PlayerInstance, Players } from "./PlayerModel";
 
-export class SequelizePlayerRepository
-	extends SequelizeRepository<Players>
-	implements PlayerRepository
-{
-	constructor(sequelize: Sequelize) {
-		super(sequelize);
-		sequelize.authenticate();
-	}
-
+export class SequelizePlayerRepository extends SequelizeRepository implements PlayerRepository {
 	async save(player: Player): Promise<void> {
-		await this.sequelize.sync();
-		if (await this.findByName(player.name)) {
+		/* if (await this.findByName(player.name)) {
 			throw new InvalidArgumentError("Player's name already exist");
-		}
-		await Players.create(player);
+		} */
+		//const players = this.sequelize.models.players;
+		const id = player.id.toString();
+		const name = player.id.toString();
+		await this.repository().create({ id, name });
 	}
 
 	async search(id: string): Promise<Player | null> {
@@ -37,5 +31,13 @@ export class SequelizePlayerRepository
 		const player = await Players.findOne({ where: { name } });
 
 		return player;
+	}
+
+	protected entityInstance(): ModelAttributes {
+		return PlayerInstance;
+	}
+
+	protected instanceName(): string {
+		return "players";
 	}
 }

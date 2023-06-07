@@ -12,3 +12,15 @@ if (process.env.NODE_ENV !== "dev") {
 	options.logging = false;
 }
 export const sequelize = new Sequelize(database, username, password, options);
+async function initializeDatabase() {
+	try {
+		await sequelize.authenticate();
+		console.log("Connection has been established successfully.");
+
+		await sequelize.sync();
+		console.log("Database & tables created!");
+	} catch (error) {
+		console.error("Unable to connect to the database:", error);
+	}
+}
+initializeDatabase();

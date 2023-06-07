@@ -1,5 +1,6 @@
 import { Player } from "../../../../../src/Players/domain/Player";
-import { SequelizePlayerRepository } from "../../../../../src/Players/infrastructure/persistences/mysql/SequelizePlayerRepositorty";
+import { PlayerName } from "../../../../../src/Players/domain/PlayerName";
+import { SequelizePlayerRepository } from "../../../../../src/Players/infrastructure/persistences/sequelize/SequelizePlayerRepositorty";
 import { Uuid } from "../../../../../src/shared/domain/value-object/Uuid";
 import { sequelize } from "../../../../../src/shared/infrastructure/persistence/config/sequelize.config";
 
@@ -9,7 +10,7 @@ describe("SequelizePlayerRepository", () => {
 		await sequelize.close();
 	});
 	it("should save a player", async () => {
-		const expectedPlayer = new Player(new Uuid(), "name");
+		const expectedPlayer = new Player(new Uuid(), new PlayerName("name"));
 		const repository = new SequelizePlayerRepository(sequelize);
 
 		await repository.save(expectedPlayer);
