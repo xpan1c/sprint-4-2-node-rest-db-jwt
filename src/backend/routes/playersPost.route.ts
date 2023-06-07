@@ -1,5 +1,5 @@
 import { Request, Response, Router } from "express";
-import { body } from "express-validator";
+import { body, checkExact } from "express-validator";
 
 import { PlayerCreator } from "../../Players/application/PlayerCreator";
 import { SequelizePlayerRepository } from "../../Players/infrastructure/persistences/sequelize/SequelizePlayerRepositorty";
@@ -17,7 +17,7 @@ export const register = (router: Router): void => {
 	const playersCtrl = new PlayersPostController(playerCreator, httpResponse);
 	router.post(
 		"/players",
-		reqSchema,
+		checkExact(reqSchema),
 		// eslint-disable-next-line @typescript-eslint/no-unsafe-argument
 		validateReqSchema,
 		// eslint-disable-next-line @typescript-eslint/no-misused-promises

@@ -7,9 +7,11 @@ import { PlayerCreatorRequest } from "./PlayerCreatorRequest";
 export class PlayerCreator {
 	constructor(private readonly repository: PlayerRepository) {}
 
-	async run(request: PlayerCreatorRequest): Promise<void> {
+	async run(request: PlayerCreatorRequest): Promise<Player> {
 		const player = new Player(new Uuid(), new PlayerName(request.name));
 
 		await this.repository.save(player);
+
+		return player;
 	}
 }

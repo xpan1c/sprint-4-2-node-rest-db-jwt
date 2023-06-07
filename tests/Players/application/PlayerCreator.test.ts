@@ -53,7 +53,6 @@ describe("PlayerCreator", () => {
 			save: jest.fn(),
 			search: jest.fn(),
 		};
-		const id = new Uuid();
 		const name = "some-name".repeat(10);
 		const creator = new PlayerCreator(repository);
 		// eslint-disable-next-line @typescript-eslint/unbound-method

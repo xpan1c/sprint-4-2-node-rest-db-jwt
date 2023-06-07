@@ -12,7 +12,7 @@ if (process.env.NODE_ENV !== "dev") {
 	options.logging = false;
 }
 export const sequelize = new Sequelize(database, username, password, options);
-async function initializeDatabase() {
+export async function initializeDatabase(): Promise<void> {
 	try {
 		await sequelize.authenticate();
 		console.log("Connection has been established successfully.");
