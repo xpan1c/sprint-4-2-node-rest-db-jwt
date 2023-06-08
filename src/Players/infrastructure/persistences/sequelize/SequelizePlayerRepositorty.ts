@@ -53,6 +53,10 @@ export class SequelizePlayerRepository extends SequelizeRepository implements Pl
 			: null;
 	}
 
+	async findAll(): Promise<Player[] | null> {
+		throw new Error("Method not implemented.");
+	}
+
 	protected entityInstance(): ModelAttributes {
 		return PlayerInstance;
 	}

@@ -9,6 +9,7 @@ describe("PlayerUpdater", () => {
 		update: jest.fn(),
 		findById: jest.fn(),
 		findByName: jest.fn(),
+		findAll: jest.fn(),
 	};
 	const updater = new PlayerUpdater(repository);
 	afterEach(() => {

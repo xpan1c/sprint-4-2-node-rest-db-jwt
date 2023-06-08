@@ -7,4 +7,5 @@ export interface PlayerRepository {
 	update(player: Player): Promise<void>;
 	findById(id: PlayerId): Promise<Player | null>;
 	findByName(name: PlayerName): Promise<Player | null>;
+	findAll(): Promise<Player[] | null>;
 }
