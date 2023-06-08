@@ -54,7 +54,15 @@ export class SequelizePlayerRepository extends SequelizeRepository implements Pl
 	}
 
 	async findAll(): Promise<Player[] | null> {
-		throw new Error("Method not implemented.");
+		const playersFromPersistence = await this.repository().findAll();
+		const players = playersFromPersistence.map((player) =>
+			Player.fromPrimitives({
+				id: player.get("id") as string,
+				name: player.get("name") as string,
+			})
+		);
+
+		return players.length !== 0 ? players : null;
 	}
 
 	protected entityInstance(): ModelAttributes {

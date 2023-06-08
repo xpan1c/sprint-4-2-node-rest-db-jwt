@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 
 import { PlayerCreator } from "../../Players/application/PlayerCreator";
-import { Player } from "../../Players/domain/Player";
+import { PlayerCreatorResponse } from "../../Players/application/PlayerCreatorResponse";
 import { HttpResponse } from "../../shared/infrastructure/response/HttpResponse";
 import { Controller } from "./Controller";
 
@@ -13,7 +13,7 @@ export class PlayersPostController implements Controller {
 
 	async run(req: Request, res: Response): Promise<void> {
 		const name: string = req.body.name;
-		let player: Player;
+		let player: PlayerCreatorResponse;
 		try {
 			player = await this.playerCreator.run({ name });
 		} catch (error) {
@@ -24,6 +24,6 @@ export class PlayersPostController implements Controller {
 
 			return;
 		}
-		this.httpResponse.Created(res, player.toPrimitives());
+		this.httpResponse.Created(res, player);
 	}
 }

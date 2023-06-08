@@ -11,6 +11,7 @@ export class PlayersGetController implements Controller {
 	) {}
 
 	async run(req: Request, res: Response): Promise<void> {
-		this.httpResponse.Ok(res, "Player updated");
+		const players = await this.playerGetter.run();
+		this.httpResponse.Ok(res, players);
 	}
 }
