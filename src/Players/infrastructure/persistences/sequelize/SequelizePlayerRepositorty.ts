@@ -3,12 +3,13 @@ import { ModelAttributes } from "sequelize";
 import { InvalidArgumentError } from "../../../../shared/domain/value-object/InvalidArgumentError";
 import { SequelizeRepository } from "../../../../shared/infrastructure/persistence/sequelize/SequelizeRepository";
 import { Player } from "../../../domain/Player";
+import { PlayerId } from "../../../domain/PlayerId";
 import { PlayerName } from "../../../domain/PlayerName";
 import { PlayerRepository } from "../../../domain/PlayerRepository";
 import { PlayerInstance } from "./PlayerModel";
 
 export class SequelizePlayerRepository extends SequelizeRepository implements PlayerRepository {
-	async save(player: Player): Promise<void> {
+	async create(player: Player): Promise<void> {
 		await this.sequelize.sync();
 		if (await this.findByName(player.name)) {
 			throw new InvalidArgumentError("Player's name already exist");
@@ -18,9 +19,16 @@ export class SequelizePlayerRepository extends SequelizeRepository implements Pl
 		}
 	}
 
-	async search(_id: string): Promise<Player | null> {
+	async update(player: Player): Promise<void> {
 		await this.sequelize.sync();
-		const player = await this.repository().findByPk(_id);
+		const id = player.id.value;
+		const name = player.name.value;
+		this.repository().update({ name }, { where: { id } });
+	}
+
+	async findById(_id: PlayerId): Promise<Player | null> {
+		await this.sequelize.sync();
+		const player = await this.repository().findByPk(_id.value);
 
 		if (player === null) {
 			throw new InvalidArgumentError("Player id does not exist");

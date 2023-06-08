@@ -11,11 +11,11 @@ export class PlayerName extends StringValueObject {
 		}
 		super(finalValue);
 
-		this.ensureLengthIsLessThan10Characters(value);
+		this.ensureLengthIsLessThan15Characters(value);
 	}
 
-	private ensureLengthIsLessThan10Characters(value: string) {
-		if (value.length > 10) {
+	private ensureLengthIsLessThan15Characters(value: string) {
+		if (value.length > 15) {
 			throw new PlayerNameLengthExceeded(`The Player name <${value}> has more than 10 characters`);
 		}
 	}

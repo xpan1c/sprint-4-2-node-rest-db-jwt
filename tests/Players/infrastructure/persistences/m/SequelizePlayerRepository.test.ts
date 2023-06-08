@@ -1,7 +1,7 @@
 import { Player } from "../../../../../src/Players/domain/Player";
+import { PlayerId } from "../../../../../src/Players/domain/PlayerId";
 import { PlayerName } from "../../../../../src/Players/domain/PlayerName";
 import { SequelizePlayerRepository } from "../../../../../src/Players/infrastructure/persistences/sequelize/SequelizePlayerRepositorty";
-import { Uuid } from "../../../../../src/shared/domain/value-object/Uuid";
 import {
 	initializeDatabase,
 	sequelize,
@@ -23,12 +23,26 @@ describe("SequelizePlayerRepository", () => {
 		await sequelize.close();
 	});
 	it("should save a player", async () => {
-		const id = new Uuid();
+		const id = new PlayerId();
 		const expectedPlayer = new Player(id, new PlayerName("name"));
 		const repository = new SequelizePlayerRepository(sequelize);
 
-		await repository.save(expectedPlayer);
-		const player = await repository.search(id.value);
+		await repository.create(expectedPlayer);
+		const player = await repository.findById(id);
 		expect(player).toEqual(expectedPlayer);
+	});
+	it("should update a player", async () => {
+		const repository = new SequelizePlayerRepository(sequelize);
+		const playerId = new PlayerId();
+		const id = playerId.value;
+		let name = "Jose";
+		const existingPlayer = Player.fromPrimitives({ id, name });
+		await repository.create(existingPlayer);
+		name = "Pepe";
+		const updatedPlayer = Player.fromPrimitives({ id, name });
+
+		await repository.update(updatedPlayer);
+		const player = await repository.findById(playerId);
+		expect(player).toEqual(updatedPlayer);
 	});
 });

@@ -10,7 +10,7 @@ export class PlayerCreator {
 	async run(request: PlayerCreatorRequest): Promise<Player> {
 		const player = new Player(new Uuid(), new PlayerName(request.name));
 
-		await this.repository.save(player);
+		await this.repository.create(player);
 
 		return player;
 	}
