@@ -6,7 +6,7 @@ import { Player } from "../../../domain/Player";
 import { PlayerId } from "../../../domain/PlayerId";
 import { PlayerName } from "../../../domain/PlayerName";
 import { PlayerRepository } from "../../../domain/PlayerRepository";
-import { PlayerInstance } from "./PlayerModel";
+import { PlayerInstance } from "./PlayerInstance";
 
 export class SequelizePlayerRepository extends SequelizeRepository implements PlayerRepository {
 	async create(player: Player): Promise<void> {
