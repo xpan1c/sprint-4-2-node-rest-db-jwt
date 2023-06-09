@@ -9,6 +9,8 @@ export const GameInstance: ModelAttributes = {
 		type: DataTypes.STRING,
 		allowNull: false,
 	},
+	diceOne: { type: DataTypes.INTEGER, allowNull: false },
+	diceTwo: { type: DataTypes.INTEGER, allowNull: false },
 	result: {
 		type: DataTypes.INTEGER,
 		allowNull: false,
