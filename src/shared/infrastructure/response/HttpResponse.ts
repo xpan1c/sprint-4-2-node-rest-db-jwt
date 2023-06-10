@@ -43,6 +43,14 @@ export class HttpResponse {
 		});
 	}
 
+	UnprocessableContent(res: Response, data?: unknown): Response {
+		return res.status(HttpStatus.UNPROCESSABLE_CONTENT).json({
+			status: HttpStatus.UNPROCESSABLE_CONTENT,
+			statusMsg: "Unprocessable Content",
+			error: data,
+		});
+	}
+
 	Forbidden(res: Response, data?: unknown): Response {
 		return res.status(HttpStatus.FORBIDDEN).json({
 			status: HttpStatus.FORBIDDEN,

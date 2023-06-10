@@ -3,7 +3,9 @@ import cors from "cors";
 import express, { Request, Response, Router } from "express";
 import helmet from "helmet";
 import * as http from "http";
+import swaggerUi from "swagger-ui-express";
 
+import swaggerSetup from "../docs/swagger";
 import { HttpResponse } from "../shared/infrastructure/response/HttpResponse";
 import { registerRoutes } from "./routes";
 
@@ -17,6 +19,7 @@ export class Server {
 		this.express.use(cors());
 		this.express.use(json());
 		this.express.use(urlencoded({ extended: true }));
+		this.express.use("/documentation", swaggerUi.serve, swaggerUi.setup(swaggerSetup));
 		const router = Router();
 		this.express.use(router);
 		registerRoutes(router);

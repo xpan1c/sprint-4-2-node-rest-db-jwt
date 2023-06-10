@@ -1,9 +1,21 @@
-import { Model, Sequelize } from "sequelize";
+import { Model, ModelAttributes, ModelStatic, Sequelize } from "sequelize";
 
-export abstract class SequelizeRepository<T extends Model> {
-	constructor(protected sequelize: Sequelize) {}
+export abstract class SequelizeRepository {
+	constructor(protected sequelize: Sequelize) {
+		this.sequelize.define(this.instanceName(), this.entityInstance(), { timestamps: false });
+	}
 
-	async persist(modelInstance: T): Promise<void> {
+	protected abstract entityInstance(): ModelAttributes;
+	protected abstract instanceName(): string;
+	/* async persist(modelInstance: T): Promise<void> {
 		await modelInstance.save();
+	} */
+
+	repository(): ModelStatic<Model> {
+		const modelName = this.instanceName();
+		const repository = this.sequelize.models[modelName];
+		this.sequelize.sync();
+
+		return repository;
 	}
 }
