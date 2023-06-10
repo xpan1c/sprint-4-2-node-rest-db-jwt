@@ -11,9 +11,11 @@ export abstract class SequelizeRepository {
 		await modelInstance.save();
 	} */
 
-	protected repository(): ModelStatic<Model> {
+	repository(): ModelStatic<Model> {
 		const modelName = this.instanceName();
+		const repository = this.sequelize.models[modelName];
+		this.sequelize.sync();
 
-		return this.sequelize.models[modelName];
+		return repository;
 	}
 }

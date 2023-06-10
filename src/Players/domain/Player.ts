@@ -1,8 +1,9 @@
+import { Game } from "../../Games/domain/Game";
 import { PlayerId } from "./PlayerId";
 import { PlayerName } from "./PlayerName";
 
 export class Player {
-	constructor(readonly id: PlayerId, readonly name: PlayerName) {}
+	constructor(readonly id: PlayerId, readonly name: PlayerName, readonly games?: Game[]) {}
 	static fromPrimitives(plainData: { id: string; name: string }): Player {
 		return new Player(new PlayerId(plainData.id), new PlayerName(plainData.name));
 	}

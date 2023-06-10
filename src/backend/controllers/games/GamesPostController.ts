@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
 
-import { GameCreator } from "../../Games/application/GameCreator";
-import { GameCreatorResponse } from "../../Games/application/GameCreatorResponse";
-import { HttpResponse } from "../../shared/infrastructure/response/HttpResponse";
-import { Controller } from "./Controller";
+import { GameCreator } from "../../../Games/application/GameCreator";
+import { GameCreatorResponse } from "../../../Games/application/GameCreatorResponse";
+import { HttpResponse } from "../../../shared/infrastructure/response/HttpResponse";
+import { Controller } from "../Controller";
 
 export class GamesPostController implements Controller {
 	constructor(

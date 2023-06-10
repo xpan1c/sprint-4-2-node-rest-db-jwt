@@ -16,6 +16,7 @@ describe("PlayerCreator", () => {
 		findById: jest.fn(),
 		findByName: jest.fn(),
 		findAll: jest.fn(),
+		findWithWinRate: jest.fn(),
 	};
 	afterEach(() => {
 		jest.restoreAllMocks();

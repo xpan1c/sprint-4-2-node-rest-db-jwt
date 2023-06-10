@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
 
-import { PlayerCreator } from "../../Players/application/PlayerCreator";
-import { PlayerCreatorResponse } from "../../Players/application/PlayerCreatorResponse";
-import { HttpResponse } from "../../shared/infrastructure/response/HttpResponse";
-import { Controller } from "./Controller";
+import { PlayerCreator } from "../../../Players/application/PlayerCreator";
+import { PlayerResponse } from "../../../Players/application/responses/PlayerResponse";
+import { HttpResponse } from "../../../shared/infrastructure/response/HttpResponse";
+import { Controller } from "../Controller";
 
 export class PlayersPostController implements Controller {
 	constructor(
@@ -13,7 +13,7 @@ export class PlayersPostController implements Controller {
 
 	async run(req: Request, res: Response): Promise<void> {
 		const name: string = req.body.name;
-		let player: PlayerCreatorResponse;
+		let player: PlayerResponse;
 		try {
 			player = await this.playerCreator.run({ name });
 		} catch (error) {

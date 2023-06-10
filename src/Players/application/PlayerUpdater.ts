@@ -1,6 +1,6 @@
 import { Player } from "../domain/Player";
 import { PlayerRepository } from "../domain/PlayerRepository";
-import { PlayerUpdaterRequest } from "./PlayerUpdaterRequest";
+import { PlayerUpdaterRequest } from "./requests/PlayerUpdaterRequest";
 
 export class PlayerUpdater {
 	constructor(private readonly repository: PlayerRepository) {}

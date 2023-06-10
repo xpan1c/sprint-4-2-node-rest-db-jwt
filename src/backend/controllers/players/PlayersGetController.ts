@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
 
-import { PlayerGetter } from "../../Players/application/PlayerGetter";
-import { HttpResponse } from "../../shared/infrastructure/response/HttpResponse";
-import { Controller } from "./Controller";
+import { PlayerGetter } from "../../../Players/application/PlayerGetter";
+import { HttpResponse } from "../../../shared/infrastructure/response/HttpResponse";
+import { Controller } from "../Controller";
 
 export class PlayersGetController implements Controller {
 	constructor(
