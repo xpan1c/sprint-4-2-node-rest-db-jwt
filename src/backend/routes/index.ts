@@ -7,7 +7,7 @@ import { HttpResponse } from "../../shared/infrastructure/response/HttpResponse"
 
 export function registerRoutes(router: Router): void {
 	const normalizedDirname = path.normalize(__dirname).replace(/\\/g, "/");
-	const routes = glob.sync(`${normalizedDirname}/*.route.*`);
+	const routes = glob.sync(`${normalizedDirname}/**/*.route.*`);
 	routes.map((route) => register(route, router));
 }
 

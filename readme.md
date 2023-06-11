@@ -1,12 +1,41 @@
-# 🦋 TypeScript TDD Template
+# 🎲 Dice Game API
 
-⚡ Start your Node.js project with Typescript using Test Driven Development (TDD) practices.
+⚡ Welcome to the Dice Game API, a web service designed to support a simple yet fun dice game. This document will guide you through the game rules, API functionalities, and the usage.
+### 🎯 Game Rules
 
+The Dice Game is played with two six-sided dice. The outcome of each game is determined by the roll of these dice:
+
+If the result of the two dice is 7, the game is won.
+Otherwise, the game is lost.
+
+### 🤖 API Functionalities
+
+In order to play the game, you must register as a player with a unique name. Each player can see a list of all the games they've played and their win rate.
+
+The API supports the following operations:
+
+- **Player registration:** A player can register with a unique name. On creation, a unique identifier and registration date is assigned. If a player does not want to add a name, they will be designated "ANONYMOUS". There can be more than one "ANONYMOUS" player.
+
+- **Play a game:** A registered player can play a game. Each game will be recorded with the result of the dice roll and whether the game was won or not.
+
+- **List games:** A player can view a list of all the games they've played, the values of each dice roll and whether they won or not. Additionally, they can see their win rate.
+
+- **Delete games:** A player cannot delete a specific game, but they can delete all of their games.
+
+- **List players:** The API allows to list all the registered players, their win rate, and the average win rate of all players.
+
+The API follows the main design patterns and respects a clean architecture structure. The persistence is achieved through MySQL database using Sequelize as an ORM.
+
+### 📑 Available Endpoints
+
+Please refer to the /documentation directory to view the full specification of the available endpoints.
+<!--
 ### 📋 GitHub Actions Workflow:
 
 [![🏠 Build](https://github.com/AraManjon/typescript-tdd-template/actions/workflows/build.yml/badge.svg?branch=master)](https://github.com/AraManjon/typescript-tdd-template/actions/workflows/build.yml)
 
-This GitHub Actions workflow automatically builds and tests the application when code changes are pushed to the master branch or a pull request targeting the master branch is opened or synchronized.
+This GitHub Actions workflow automatically builds and tests the application when code changes are pushed to the master branch or a pull request targeting the main branch is opened or synchronized.
+-->
 
 ### 📥 Installation
 
@@ -53,7 +82,11 @@ This will start the server and make it available at http://localhost:8000.
 ### 🏗️ Scripts
 This project comes with several predefined scripts in the package.json file:
 
-```test```: Runs tests using Jest.
+```test```: Runs tests unit and acceptance tests.
+
+```test:unit```: Runs tests using jest.
+
+```test:features```: Runs tests using cucumber and supertest.
 
 ```lint```: Runs ESLint to check code quality.
 
@@ -65,6 +98,7 @@ This project comes with several predefined scripts in the package.json file:
 
 ```start```: Starts the server in production using the compiled files in the dist/ folder.
 
+<!--
 ### 📝 Dependencies
 
 - cors: middleware for handling Cross-Origin Resource Sharing (CORS)
@@ -136,6 +170,7 @@ src/
         ├── services
         └── UserModule.ts
 ```
+-->
 
 
 
