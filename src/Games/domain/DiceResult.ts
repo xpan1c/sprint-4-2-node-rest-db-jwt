@@ -6,6 +6,6 @@ export class DiceResult extends NumberValueObject {
 	}
 
 	protected toString(): string {
-		throw new Error("Method not implemented.");
+		return this.value.toString();
 	}
 }
