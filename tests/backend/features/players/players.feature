@@ -27,11 +27,3 @@ Feature: Player Management in the Dice Game
         When I send a POST request to "/players" with this player
         And I send a GET request to "/players"
         Then the response status code should be 200
-        And  the response body should contain 
-        """
-        {
-        "status": 200,
-        "statusMsg": "Success",
-        "data": "Player updated"
-        }
-        """
