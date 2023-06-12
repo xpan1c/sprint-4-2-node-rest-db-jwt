@@ -11,42 +11,33 @@ beforeAll(async () => {
 	await initializeDatabase();
 });
 
+afterEach(async () => {
+	await sequelize.drop();
+});
+
 afterAll(async () => {
 	await sequelize.close();
 });
 
 describe("SequelizePlayerRepository", () => {
+	//let repository: SequelizePlayerRepository;
+	const id = new PlayerId();
+	const expectedPlayer = new Player(id, new PlayerName("name"));
 	let repository: SequelizePlayerRepository;
-
-	beforeEach(async () => {
-		await sequelize.drop();
-		await sequelize.sync();
-		repository = new SequelizePlayerRepository(sequelize);
-	});
-
-	afterAll(async () => {
-		await sequelize.drop();
-		await sequelize.close();
-	});
-
 	it("should save a player", async () => {
-		const id = new PlayerId();
-		const expectedPlayer = new Player(id, new PlayerName("name"));
+		repository = new SequelizePlayerRepository(sequelize);
 		await repository.create(expectedPlayer);
 		const player = await repository.findById(id);
 		expect(player).toEqual(expectedPlayer);
 	});
 
 	it("should update a player", async () => {
-		const playerId = new PlayerId();
-		const id = playerId.value;
-		const existingPlayer = Player.fromPrimitives({ id, name: "Jose" });
-		await repository.create(existingPlayer);
+		await repository.create(expectedPlayer);
 
-		const updatedPlayer = Player.fromPrimitives({ id, name: "Pepe" });
+		const updatedPlayer = Player.fromPrimitives({ id: id.value, name: "Pepe" });
 		await repository.update(updatedPlayer);
 
-		const player = await repository.findById(playerId);
+		const player = await repository.findById(id);
 		expect(player).toEqual(updatedPlayer);
 	});
 

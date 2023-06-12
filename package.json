@@ -1,5 +1,5 @@
 {
-  "name": "typescript-tdd-template",
+  "name": "dice-game-api",
   "version": "1.0.0",
   "description": "**1.- instalar typescript en el folder proyecto**",
   "main": "./src/backend/server.start.ts",
@@ -39,7 +39,7 @@
   },
   "dependencies": {
     "cors": "^2.8.5",
-    "dotenv": "^16.0.3",
+    "dotenv": "^16.1.4",
     "express": "^4.18.2",
     "express-promise-router": "^4.1.1",
     "express-validator": "^7.0.1",
@@ -49,7 +49,7 @@
     "mongoose": "^7.2.2",
     "mysql2": "^3.2.0",
     "reflect-metadata": "^0.1.13",
-    "sequelize": "^6.31.1",
+    "sequelize": "^6.32.0",
     "sequelize-typescript": "^2.1.5",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^4.6.3"

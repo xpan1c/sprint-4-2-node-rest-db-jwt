@@ -17,6 +17,8 @@ describe("PlayerCreator", () => {
 		findByName: jest.fn(),
 		findAll: jest.fn(),
 		findWithWinRate: jest.fn(),
+		findRanking: jest.fn(),
+		findWinnerOrLoser: jest.fn(),
 	};
 	afterEach(() => {
 		jest.restoreAllMocks();

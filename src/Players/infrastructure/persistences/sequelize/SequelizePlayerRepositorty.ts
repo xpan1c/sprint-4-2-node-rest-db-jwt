@@ -18,25 +18,26 @@ export class SequelizePlayerRepository extends SequelizeRepository implements Pl
 		const GameModel = new SequelizeGameRepository(sequelize).repository();
 		PlayerModel.hasMany(GameModel, { foreignKey: "playerId" });
 		GameModel.belongsTo(PlayerModel, { foreignKey: "playerId" });
-		this.sequelize.sync();
 	}
 
 	async create(player: Player): Promise<void> {
+		await this.sequelize.sync();
 		if (await this.findByName(player.name)) {
 			throw new InvalidArgumentError("Player's name already exist");
-		} else {
-			// eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-			await this.repository().create(player.toPrimitives());
 		}
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+		await this.repository().create(player.toPrimitives());
 	}
 
 	async update(player: Player): Promise<void> {
+		await this.sequelize.sync();
 		const id = player.id.value;
 		const name = player.name.value;
 		await this.repository().update({ name }, { where: { id } });
 	}
 
 	async findById(_id: PlayerId): Promise<Player | null> {
+		await this.sequelize.sync();
 		const player = await this.repository().findByPk(_id.value);
 
 		if (player === null) {
@@ -51,6 +52,7 @@ export class SequelizePlayerRepository extends SequelizeRepository implements Pl
 	}
 
 	async findByName(name: PlayerName): Promise<Player | null> {
+		await this.sequelize.sync();
 		const player = await this.repository().findOne({ where: { name: name.value } });
 
 		return player
@@ -62,6 +64,7 @@ export class SequelizePlayerRepository extends SequelizeRepository implements Pl
 	}
 
 	async findAll(): Promise<Player[] | null> {
+		await this.sequelize.sync();
 		const playersFromPersistence = await this.repository().findAll();
 		const players = playersFromPersistence.map((player) =>
 			Player.fromPrimitives({
@@ -74,6 +77,7 @@ export class SequelizePlayerRepository extends SequelizeRepository implements Pl
 	}
 
 	async findWithWinRate(): Promise<Array<{ player: Player; winRate: number }>> {
+		await this.sequelize.sync();
 		const playersData = await this.repository().findAll({
 			include: [
 				{
@@ -109,7 +113,7 @@ export class SequelizePlayerRepository extends SequelizeRepository implements Pl
 	}
 
 	async findRanking(): Promise<Array<{ player: Player; winRate: number; averageWinRate: number }>> {
-		// Primero, encuentra todos los jugadores y su winRate, y ordena por winRate en orden descendente
+		await this.sequelize.sync();
 		const playersData = await this.repository().findAll({
 			include: [
 				{
@@ -152,6 +156,7 @@ export class SequelizePlayerRepository extends SequelizeRepository implements Pl
 	}
 
 	async findWinnerOrLoser(winner: GameWin): Promise<{ player: Player; winRate: number }> {
+		await this.sequelize.sync();
 		const results: PlayerQueryResult[] = await this.sequelize.query(
 			`
 		  SELECT 

@@ -6,11 +6,29 @@ on:
   pull_request:
     branches: [main]
     types: [opened, synchronize]
-
+env:
+  PORT: 8000
+  NODE_ENV: test
+  DATABASE_NAME: game
+  DATABASE_NAME_TEST: name_db_test
+  DATABASE: mysql
+  MONGO_URI: mongodb://127.0.0.1:27017
+  MYSQL_HOST: localhost
+  MYSQL_USER: root
+  MYSQL_PASSWORD: 1234
 jobs:
   build:
     runs-on: ubuntu-latest
     name: 🏠 Build
+    services:
+      mysql:
+        image: mysql:5.7
+        env:
+          MYSQL_PASSWORD: ${{ env.MYSQL_PASSWORD }}
+          MYSQL_DATABASE: ${{ env.DATABASE_NAME }}
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=10
     steps:
       - name: 🧹 Cancel previus redundant builds
         uses: styfle/cancel-workflow-action@0.9.1

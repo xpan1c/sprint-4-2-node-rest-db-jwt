@@ -10,6 +10,9 @@ describe("PlayerUpdater", () => {
 		findById: jest.fn(),
 		findByName: jest.fn(),
 		findAll: jest.fn(),
+		findWithWinRate: jest.fn(),
+		findRanking: jest.fn(),
+		findWinnerOrLoser: jest.fn(),
 	};
 	const updater = new PlayerUpdater(repository);
 	afterEach(() => {

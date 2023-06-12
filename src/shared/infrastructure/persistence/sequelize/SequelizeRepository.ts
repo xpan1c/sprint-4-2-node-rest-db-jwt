@@ -14,7 +14,6 @@ export abstract class SequelizeRepository {
 	repository(): ModelStatic<Model> {
 		const modelName = this.instanceName();
 		const repository = this.sequelize.models[modelName];
-		this.sequelize.sync();
 
 		return repository;
 	}

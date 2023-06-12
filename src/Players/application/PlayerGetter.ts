@@ -8,7 +8,9 @@ export class PlayerGetter {
 
 	async run(): Promise<PlayerGetterResponse[]> {
 		const playersPersistence = await this.repository.findWithWinRate();
-
+		if (!playersPersistence.length) {
+			throw new Error("There are no players");
+		}
 		const cb = (response: { player: Player; winRate: number }): PlayerGetterResponse => {
 			const player: PlayerResponse = response.player.toPrimitives();
 			const winRate = response.winRate;
