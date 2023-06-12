@@ -29,20 +29,19 @@ The API follows the main design patterns and respects a clean architecture struc
 ### 📑 Available Endpoints
 
 Please refer to the /documentation directory to view the full specification of the available endpoints.
-<!--
+
 ### 📋 GitHub Actions Workflow:
 
-[![🏠 Build](https://github.com/AraManjon/typescript-tdd-template/actions/workflows/build.yml/badge.svg?branch=master)](https://github.com/AraManjon/typescript-tdd-template/actions/workflows/build.yml)
+[![🏠 Build](https://github.com/xpan1c/sprint-4-2-node-rest-db-jwt/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/xpan1c/sprint-4-2-node-rest-db-jwt/actions/workflows/build.yml)
 
 This GitHub Actions workflow automatically builds and tests the application when code changes are pushed to the master branch or a pull request targeting the main branch is opened or synchronized.
--->
 
 ### 📥 Installation
 
 To get started with this template, you first need to clone the repository:
 
 ```bash
-git clone https://github.com/AraManjon/typescript-tdd-template.git
+git clone https://github.com/xpan1c/sprint-4-2-node-rest-db-jwt.git
 ```
 
 Then, install the project dependencies:
