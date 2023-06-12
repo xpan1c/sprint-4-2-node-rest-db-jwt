@@ -16,7 +16,7 @@ export class PlayerName extends StringValueObject {
 
 	private ensureLengthIsLessThan15Characters(value: string) {
 		if (value.length > 15) {
-			throw new PlayerNameLengthExceeded(`The Player name <${value}> has more than 10 characters`);
+			throw new PlayerNameLengthExceeded(`The Player name <${value}> has more than 15 characters`);
 		}
 	}
 }
